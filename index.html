@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DOCU ASSISTANT</title>
+<title>CALL HELPER</title>
 <style>
     body { font-family: Arial, sans-serif; background: #f4f6f9; margin:0; padding:20px; }
     h2, h3 { color: #d15600; }
@@ -299,7 +300,7 @@ label {
 #quickLinks {
   position: fixed;
   top: 100px;
-  left: 10px;
+  left: 20px;
   width: 300px;          /* 👈 wider */
   padding: 12px;
   background: #ffffff;
@@ -399,11 +400,11 @@ label {
 /* Minimized icon */
 #notesMinimized {
   position: fixed;
-  bottom: 150px;
-  right: 20px;
+  bottom: 200px;
+  left: 20px;
 
-  width: 64px;          /* 👈 bigger */
-  height: 64px;         /* 👈 bigger */
+  width: 70px;          /* 👈 bigger */
+  height: 70px;         /* 👈 bigger */
 
   display: none;
   align-items: center;
@@ -431,12 +432,134 @@ label {
   transition: opacity 0.2s ease;
 }
 
+/* Quick Links panel */
+.quicklinks-container {
+  position: fixed;
+  left: 20px;
+  top: 140px;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #999;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  z-index: 9000;
+}
+
+/* Header */
+.quicklinks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+}
+
+/* Content */
+.quicklinks-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+}
+
+.quicklinks-content a {
+  font-size: 11px;
+  text-decoration: none;
+  color: #0066cc;
+}
+
+/* Minimized book icon */
+#quickLinksMinimized {
+  position: fixed;
+  left: 20px;
+  top: 100px;
+  width: 70px;          /* 👈 bigger */
+  height: 70px;         /* 👈 bigger */
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: #f5f5f5;
+  border: 2px solid #888;   /* 👈 slightly thicker border */
+  border-radius: 50%;
+
+  cursor: pointer;
+  z-index: 10000;
+
+  font-size: 26px;      /* 👈 icon/text bigger */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.tool-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 6px;
+}
+
+/* Tooltip */
+.tool-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  margin-top: 6px;
+}
+
+.tool-btn:hover::after {
+  opacity: 1;
+}
+
+#timerMinimized,
+#quickLinksMinimized,
+#notesMinimized {
+  display: none !important;
+}
 
 </style>
 </head>
 <body>
 
-<h2>DOCU ASSISTANT</h2>
+<div class="top-toolbar">
+  <div class="toolbar-left">
+    📞 <strong>CALL HELPER</strong>
+  </div>
+
+  <div class="toolbar-right">
+    <button class="tool-btn" onclick="toggleQuickLinks()" data-label="Quick Links">📘</button>
+<button class="tool-btn" onclick="toggleNotes()" data-label="Notes">📝</button>
+<button class="tool-btn" onclick="toggleTimer()" data-label="Timer">⏱️</button>
+
+  </div>
+</div>
+
+
 
 
 
@@ -718,14 +841,21 @@ label {
 </button>
 </div>
 
-<div id="quickLinks">
-  <div class="ql-title">Quick Links</div>
+<div class="quicklinks-container" id="quickLinks">
+  <div class="quicklinks-header">
+    <span>Quick Links</span>
+    <button onclick="toggleQuickLinks()">➖</button>
+  </div>
 
  
 <a href="https://dxcportal.sharepoint.com/sites/ProjectAntelope911/Shared%20Documents/04%20Business%20Ops%20and%20Testing/NET%20Documents/Call%20Center/Wilton%20Re%20Call%20Center%20Quality%20Guidebook.pdf?csf=1&e=KxQrqN&CID=2f0527e4-5395-476e-9030-fc5cdfc841d5" target="_blank">Wilton Re Call Center Quality Guidebook</a>
  <a href="https://dxcportal.sharepoint.com/sites/ProjectAntelope911/Shared%20Documents/04%20Business%20Ops%20and%20Testing/NET%20Documents/Call%20Center/Caller%20Authentication%20Guide.pdf?csf=1&e=EdzL78&CID=37aaf85e-7daf-46fb-a36e-56bd0ebd7b38" target="_blank">Caller Authentication Guide- Sharepoint</a>
  <a href="https://dxcportal.sharepoint.com/sites/ProjectAntelope911/Shared%20Documents/04%20Business%20Ops%20and%20Testing/NET%20Documents/Call%20Center/AWD%20Work%20Types%20Job%20Aid.pdf?csf=1&e=yDB3HH&CID=0594d9a0-5319-4af8-9cb5-fe0a4b6e2502" target="_blank">AWD Work Types Job Aid</a>
 </div>
+</div>
+
+<!-- Minimized Quick Links Icon -->
+<div id="quickLinksMinimized" onclick="toggleQuickLinks()">📘</div>
 
 <!-- Floating Notepad -->
 <div class="notes-container" id="notesContainer">
@@ -755,6 +885,20 @@ label {
 <div id="notesMinimized" onclick="toggleNotes()">📒</div>
 
 <script>
+
+
+function toggleQuickLinks() {
+  const panel = document.getElementById("quickLinks");
+  const icon = document.getElementById("quickLinksMinimized");
+
+  if (panel.style.display === "none") {
+    panel.style.display = "block";
+    icon.style.display = "none";
+  } else {
+    panel.style.display = "none";
+    icon.style.display = "flex";
+  }
+}
 
 
 
@@ -1437,12 +1581,63 @@ window.addEventListener("load", () => {
       color: red;
       animation: blink 0.5s step-start infinite;
     }
+    .timer-container {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 220px;
+  background: #fff;
+  border: 1px solid #999;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+  z-index: 9500;
+}
+
+/* Header */
+.timer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  font-size: 12px;
+  cursor: grab;
+}
+
+/* Minimized icon */
+#timerMinimized {
+  position: fixed;
+  left: 20px;
+  top: 450px;
+  width: 70px;          /* 👈 bigger */
+  height: 70px;         /* 👈 bigger */
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  background: #f5f5f5;
+  border: 2px solid #888;   /* 👈 slightly thicker border */
+  border-radius: 50%;
+
+  cursor: pointer;
+  z-index: 10000;
+
+  font-size: 26px;      /* 👈 icon/text bigger */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
   </style>
 </head>
 
-<body>
 
-  <div class="timer-container">
+<body>
+<div class="timer-container" id="timerContainer">
+  <div class="timer-header">
+      <span>Call Timer</span>
+    <button onclick="toggleTimer()">➖</button>
+  </div>
     <div class="timer" id="timer">00:00</div>
 
     <!-- SIZE CONTROLS -->
@@ -1458,7 +1653,8 @@ window.addEventListener("load", () => {
     <button id="stopBtn">Stop</button>
     <button id="resetBtn">Reset</button>
   </div>
-
+  <!-- Minimized Timer Icon -->
+<div id="timerMinimized" onclick="toggleTimer()">⏱️</div>
   <script>
     let timer;
     let seconds = 0;
@@ -1478,6 +1674,22 @@ window.addEventListener("load", () => {
     const holdBtn = document.getElementById("holdBtn");
     const zoomInBtn = document.getElementById("zoomInBtn");
     const zoomOutBtn = document.getElementById("zoomOutBtn");
+
+    
+function toggleTimer() {
+  const timer = document.getElementById("timerContainer");
+  const icon = document.getElementById("timerMinimized");
+
+  if (timer.style.display === "none") {
+    timer.style.display = "block";
+    icon.style.display = "none";
+  } else {
+    timer.style.display = "none";
+    icon.style.display = "flex";
+  }
+}
+
+
 
     /* =========================
        FIXED VOICE FUNCTION
@@ -1608,6 +1820,7 @@ window.addEventListener("load", () => {
     }
 
     updateTimer();
+
   </script>
 
 
@@ -1617,9 +1830,7 @@ window.addEventListener("load", () => {
 
 
 <footer>
-    DOCU_ASSIST.V012526_CDG
+    CHv012526_cdg
 </footer>
-
-
 
 
