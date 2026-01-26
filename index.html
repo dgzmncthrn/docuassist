@@ -597,6 +597,7 @@ label {
       <option value="trust">Trust</option>
       <option value="trustBeneficiary">Trust as Beneficiary</option>
       <option value="amelia">Authenticating with Amelia</option>
+      <option value="Others">Others</option>
     </select>
   </label>
 
@@ -1218,7 +1219,8 @@ const authMapping = {
   thirdParty: ["Policy Number","Authorized Third Party or POA on File","DOB or SSN","Current Address"],
   trust: ["Policy Number","Trustee Name","Trust Tax ID","Trust Date"],
   trustBeneficiary: ["Policy Number","Trustee Name","Trustee Address","Trust Tax ID","Completed Claim or Trust Verification Form on File"],
-  amelia: ["Authentication completed using Amelia system information"]
+  amelia: ["Authentication completed using Amelia system information"],
+  Others: ["Unauthorized","Unauthenticated"]
 };
 
 // ---------- QUICK PHRASES ----------
@@ -1832,6 +1834,7 @@ function toggleTimer() {
 <footer>
     CHv012526_cdg
 </footer>
+
 
 
 
