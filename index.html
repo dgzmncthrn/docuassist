@@ -1212,11 +1212,11 @@ const authMapping = {
   livingContingentBeneficiary: ["Policy Number (WRM Policy Only)","Contingent Beneficiary Name","Contingent Beneficiary SSN","Contingent Beneficiary Current Address"],
   namedEstate: ["Policy Number (WRM Policy Only)","Estate Name","Executor Name","Estate Address","Estate Tax ID","Executor Documentation on File"],
   annuityPayee: ["Policy Number","Payee Name","Payee SSN or Tax ID","Payee Current Address"],
-  policyOwner: ["Policy Number","Last 4 of SSN","Insured DOB","Current Address","Last Payment Date"],
-  premiumPayor: ["Policy Number","Last 4 of SSN","Insured DOB","Payment History"],
+  policyOwner: ["Policy Number","Current address","Last 4 of SSN","Insured DOB","Last Payment Date"],
+  premiumPayor: ["Policy Number","Current Address","Last 4 of SSN","Insured DOB","Payment History"],
   servicingAgent: ["Policy Number","Servicing Agent Name","Agent Address","Agency Number","Last 4 of SSN"],
   servicingAgentAssistant: ["Policy Number","Assistant Name","Servicing Agent Name","Agent Address","Agency Number"],
-  thirdParty: ["Policy Number","Authorized Third Party or POA on File","DOB or SSN","Current Address"],
+  thirdParty: ["Policy Number","Current Address","Authorized Third Party or POA on File","DOB or SSN"],
   trust: ["Policy Number","Trustee Name","Trust Tax ID","Trust Date"],
   trustBeneficiary: ["Policy Number","Trustee Name","Trustee Address","Trust Tax ID","Completed Claim or Trust Verification Form on File"],
   amelia: ["Authentication completed using Amelia system information"],
@@ -1834,6 +1834,7 @@ function toggleTimer() {
 <footer>
     CHv012526_cdg
 </footer>
+
 
 
 
